@@ -1,128 +1,36 @@
 import java.util.Scanner;
 
 public class Main {
-    private static Scanner scanner;
-    private static Library library;
+    private static  Scanner scanner;
 
     public static void main(String[] args) {
+        // Inisialisasi objek Scanner
         scanner = new Scanner(System.in);
-        library = new Library();
 
-        library.addBook(new Book("Java Programming", "John Doe", "B001"), true);
-        library.addBook(new Book("Python Basics", "Jane Smith", "B002"), true);
-        library.addBook(new Book("Data Structures", "Alice Johnson", "B003"), true);
+        User user1 = new User("Jhon Doe", "admin");
+        User user2 = new User("Garry", "member");
 
-        int choice;
-        do {
-            // nomor 1 buat dan gunakan method login
-            System.out.println("Pilih Menu");
-            System.out.println("1. Login User");
-            System.out.println("2. Login Admin");
-            System.out.println("3. Keluar");
-            System.out.print("Pilih Opsi (1 - 3) : ");
-            choice = scanner.nextInt();
-            scanner.nextLine();
+        System.out.print("\nMasukkan nama anda: ");
+        String namaPengguna = scanner.nextLine();
+        System.out.print("\nMasukkan role anda: ");
+        String rolePengguna = scanner.nextLine();
 
-            switch (choice) {
-                case 1:
-                    // soal nomor 3 (yang memiliki hak akses untuk menampilkan ketersediaan book
-                    // serta meminjam dan mengembalikan book adalah User)
-                    System.out.println();
-                    showMenuUser();
-                    break;
-                case 2:
-                    // soal nomor 2 (yang memiliki hak mengelola buku adalah Admin)
-                    System.out.println();
-                    showMenuAdmin();
-                    break;
-                case 3:
-                    System.out.println("Terima kasih!");
-                    break;
-                default:
-                    System.out.println("Pilihan tidak valid. Silahkan pilih 1 - 3");
-                    System.out.println();
-            }
-        } while (choice != 3);
-        scanner.close();
-    }
 
-    private static void showMenuAdmin() {
-        int choiceMenuAdmin;
-        do {
-            System.out.println("Pilih Menu Admin");
-            System.out.println("1. Tampilkan Daftar Buku");
-            System.out.println("2. Tambah Buku Baru");
-            System.out.println("3. Hapus Data Buku");
-            System.out.println("4. Cari Buku");
-            System.out.println("5. Logout");
-            System.out.print("Pilih Opsi (1 - 5) : ");
-            choiceMenuAdmin = scanner.nextInt();
-            scanner.nextLine();
+        if (namaPengguna.equals(user1.nama) && rolePengguna.equals(user1.role)) {
+            Admin admin = new Admin(namaPengguna);
+            admin.checkRole(namaPengguna, rolePengguna);
 
-            switch (choiceMenuAdmin) {
-                case 1:
-                    library.showAllBooks();
-                    break;
-                case 2:
-                    System.out.print("Masukkan ID Buku (Contoh 'B001') : ");
-                    String id = scanner.nextLine();
-                    System.out.print("Masukkan Judul Buku : ");
-                    String title = scanner.nextLine();
-                    System.out.print("Masukkan Nama Penulis Buku : ");
-                    String author = scanner.nextLine();
-                    library.addBook(new Book(title, author, id), false);
-                    break;
-                case 3:
-                    System.out.print("Masukkan Judul Buku yang ingin Dihapus : ");
-                    String keyword = scanner.nextLine();
-                    library.removeBook(keyword);
-                    break;
-                case 4:
-                    System.out.print("Masukkan Judul Buku yang ingin Dicari : ");
-                    String key = scanner.nextLine();
-                    library.searchBook(key);
-                    break;
-                case 5:
-                    System.out.println("Admin Berhasil Logout");
-                    break;
-                default:
-                    System.out.println("Pilihan tidak valid. Silahkan pilih 1 - 3");
-            }
-        } while (choiceMenuAdmin != 5);
-    }
+            admin.interactWithSystem();
+        } else if(namaPengguna.equals(user2.nama) && rolePengguna.equals(user2.role)) {
+            Member member = new Member(namaPengguna);
 
-    private static void showMenuUser() {
-        int choiceMenuUser;
-        do {
-            System.out.println("Pilih Menu User");
-            System.out.println("1. Lihat Buku yang Tersedia");
-            System.out.println("2. Pinjam Buku");
-            System.out.println("3. Kembalikan Buku");
-            System.out.println("4. Logout");
-            System.out.print("Pilih Opsi (1 - 4) : ");
-            choiceMenuUser = scanner.nextInt();
-            scanner.nextLine();
+            member.checkRole(namaPengguna, rolePengguna);
 
-            switch (choiceMenuUser) {
-                case 1:
-                    library.showAvailableBooks();
-                    break;
-                case 2:
-                    System.out.print("Masukkan Judul Buku yang ingin Dipinjam: ");
-                    String borrowTitle = scanner.nextLine();
-                    library.borrowBook(borrowTitle);
-                    break;
-                case 3:
-                    System.out.print("Masukkan Judul Buku yang ingin Dikembalikan: ");
-                    String returnTitle = scanner.nextLine();
-                    library.returnBook(returnTitle);
-                    break;
-                case 4:
-                    System.out.println("User Berhasil Logout");
-                    break;
-                default:
-                    System.out.println("Pilihan tidak valid. Silahkan pilih 1 - 4");
-            }
-        } while (choiceMenuUser != 4);
+            member.interactWithSystem();
+        } else{
+            System.out.println("\nNama atau role yang anda masukkan tidak sesuai.");
+            scanner.close();
+        }
+
     }
 }
