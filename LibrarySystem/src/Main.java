@@ -24,15 +24,18 @@ public class Main {
             scanner.nextLine();
 
             switch (choice) {
-                case 1 :
-                    // showMenuUser();
+                case 1:
+                    // soal nomor 3 (yang memiliki hak akses untuk menampilkan ketersediaan book
+                    // serta meminjam dan mengembalikan book adalah User)
+                    System.out.println();
+                    showMenuUser();
                     break;
-                case 2 :
+                case 2:
                     // soal nomor 2 (yang memiliki hak mengelola buku adalah Admin)
                     System.out.println();
                     showMenuAdmin();
                     break;
-                case 3 :
+                case 3:
                     System.out.println("Terima kasih!");
                     break;
                 default:
@@ -57,10 +60,10 @@ public class Main {
             scanner.nextLine();
 
             switch (choiceMenuAdmin) {
-                case 1 :
+                case 1:
                     library.showAllBooks();
                     break;
-                case 2 :
+                case 2:
                     System.out.print("Masukkan ID Buku (Contoh 'B001') : ");
                     String id = scanner.nextLine();
                     System.out.print("Masukkan Judul Buku : ");
@@ -69,22 +72,57 @@ public class Main {
                     String author = scanner.nextLine();
                     library.addBook(new Book(title, author, id), false);
                     break;
-                case 3 :
+                case 3:
                     System.out.print("Masukkan Judul Buku yang ingin Dihapus : ");
                     String keyword = scanner.nextLine();
                     library.removeBook(keyword);
                     break;
-                case 4 :
+                case 4:
                     System.out.print("Masukkan Judul Buku yang ingin Dicari : ");
                     String key = scanner.nextLine();
                     library.searchBook(key);
                     break;
-                case 5 :
+                case 5:
                     System.out.println("Admin Berhasil Logout");
                     break;
                 default:
                     System.out.println("Pilihan tidak valid. Silahkan pilih 1 - 3");
             }
         } while (choiceMenuAdmin != 5);
+    }
+
+    private static void showMenuUser() {
+        int choiceMenuUser;
+        do {
+            System.out.println("Pilih Menu User");
+            System.out.println("1. Lihat Buku yang Tersedia");
+            System.out.println("2. Pinjam Buku");
+            System.out.println("3. Kembalikan Buku");
+            System.out.println("4. Logout");
+            System.out.print("Pilih Opsi (1 - 4) : ");
+            choiceMenuUser = scanner.nextInt();
+            scanner.nextLine();
+
+            switch (choiceMenuUser) {
+                case 1:
+                    library.showAvailableBooks();
+                    break;
+                case 2:
+                    System.out.print("Masukkan Judul Buku yang ingin Dipinjam: ");
+                    String borrowTitle = scanner.nextLine();
+                    library.borrowBook(borrowTitle);
+                    break;
+                case 3:
+                    System.out.print("Masukkan Judul Buku yang ingin Dikembalikan: ");
+                    String returnTitle = scanner.nextLine();
+                    library.returnBook(returnTitle);
+                    break;
+                case 4:
+                    System.out.println("User Berhasil Logout");
+                    break;
+                default:
+                    System.out.println("Pilihan tidak valid. Silahkan pilih 1 - 4");
+            }
+        } while (choiceMenuUser != 4);
     }
 }
