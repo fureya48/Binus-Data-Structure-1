@@ -30,3 +30,16 @@ Buat array untuk menyimpan data buku di perpustakaan. Buku harus memiliki atribu
 
 #### 4. Polymorphism pada Pengguna:
 Buat metode polymorphic untuk menunjukkan perbedaan antara cara admin dan anggota berinteraksi dengan sistem. Misalnya, admin dapat menambah atau menghapus buku, sedangkan anggota hanya bisa meminjam atau mengembalikan buku.
+
+
+
+### Jawaban:
+#### 1. Konsep OOP:
+##### 1a. 
+##### 1b. Inheritance dan polymorphism digunakan dalam kasus ini
+Inheritance adalah konsep yang memungkinkan admin untuk membuat kelas baru (subkelas) yang mewarisi atribut dan metode dari kelas lain (superkelas). Dengan kata lain, subkelas dapat mewarisi atau mendapatkan fitur-fitur yang ada di superkelas tanpa perlu menulis ulang kode yang sama. Sedangkan Polymorphism adalah kemampuan objek untuk mengambil banyak bentuk. Dalam Java, polimorfisme bisa diwujudkan dengan dua cara utama Method Overriding dan Method Overloading.
+Dalam kasus sistem manajemen perpustakaan sederhana, kami dari group 6 mencoba membuat keduanya bekerja bersama untuk membuat sistem yang lebih fleksibel dan mudah dikelola. Inheritance memungkinkan kita untuk membuat kelas Admin dan Member yang mewarisi fungsionalitas umum dari kelas User (seperti atribut idUser dan metode login() dan logout()  ).
+Polymorphism memungkinkan kelas Admin dan Member untuk memberikan implementasi yang berbeda untuk metode login() dan memanggilnya dengan cara yang sama pada objek dari kedua kelas tersebut. Ini memanfaatkan fitur umum (seperti login()) yang dapat berperilaku berbeda tergantung pada jenis objek yang memanggilnya.
+
+##### 1c. Class Diagram
+
